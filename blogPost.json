@@ -1,4 +1,5 @@
-{"blogAuthor":"Admin","blogTitle":"Welcome to Diario Semanal!","blogContent":"Welcome! We hope you enjoy this website!","blogDate":"2019-11-25T12:10:02.132Z"}
-,
-{"blogAuthor":"","blogTitle":"","blogContent":"sASzfdg","blogDate":"2019-11-25T12:23:12.456Z"},
-{"blogAuthor":"","blogTitle":"","blogContent":"ghvvm","blogDate":"2019-11-25T12:23:41.641Z"}
+{
+  "blogData": [
+    {"blogAuthor":"Admin","blogTitle":"Welcome to Diario Semanal!","blogContent":"Welcome! We hope you enjoy this website!","blogDate":"2019-11-25T12:10:02.132Z"}
+  ]
+}
