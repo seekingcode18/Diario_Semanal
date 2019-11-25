@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
 app.get('/newPost', (req, res) => {
   res.sendFile(__dirname + '/views/newPost.html')
 });
+app.get('/blogPost', (req, res) => {
+  res.sendFile(__dirname +  '/views/blogPost.html')
+    
+});
 
 app.post('/publishPost', (req, res)=>{
   const blogAuthor = req.body.blogAuthor;
@@ -26,11 +30,15 @@ app.post('/publishPost', (req, res)=>{
     blogTitle,
     blogContent,
     blogDate
-  }
-  // fs.writeFile('blogPost.json', JSON.stringify(data), (error)=>{
-  //   if(error) throw error;
-  //   console.log("Data written to file.");
-  // });
+  } 
+  const dataToWrite = ',' +  '\n' + JSON.stringify(data);
+
+  fs.appendFile('blogPost.json', dataToWrite, (error)=>{
+    if(error) throw error;
+    console.log("Data written to file.");
+
+  });
+  res.redirect('/blogPost')
 });
 
 app.listen(port, () => console.log('Listening on 8080'));
