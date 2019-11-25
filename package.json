@@ -1,0 +1,22 @@
+{
+  "name": "diario_semanal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadesuzarte/Diario_Semanal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jadesuzarte/Diario_Semanal/issues"
+  },
+  "homepage": "https://github.com/jadesuzarte/Diario_Semanal#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
