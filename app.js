@@ -10,12 +10,14 @@ app.use(express.urlencoded({extended: false}));
 app.get('/', (req, res) => {
   res.send('index')
 });
-app.get('/blogPost/:index', (req, res) => {
+
+app.get('/blogPost/:title', (req, res) => {
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if(error) throw error;
+    const title = req.params.title;
     const object = JSON.parse(contents);
-    object.blogData.push(newBlogPost);
-    
+    const currentPost = object.blogData.find(post => post.blogTitle === title);
+    res.send(currentPost);
   });
 })
 
@@ -54,7 +56,8 @@ app.get('/blogData', (req, res) => {
   });
   res.redirect('/fetchData');
 });
-  app.get('/fetchData', (req, res) => {
+
+app.get('/fetchData', (req, res) => {
     
     res.sendFile(__dirname +  '/views/blogPost.html')
 
