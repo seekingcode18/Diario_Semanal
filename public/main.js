@@ -1,11 +1,6 @@
 $(document).ready(() => {
-$("textarea").keydown( (event) => {
-console.log('keydown');
-console.log($("textarea").val().length) 
-})
-
-
-
-
-
+  $("textarea").on('input', (event) => {
+    const textareaLength = $("textarea").val().length;
+    $('.characterCount').html(`Remaining characters: ${2500 - textareaLength}`)
+  });
 });
