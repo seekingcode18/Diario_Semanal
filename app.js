@@ -15,36 +15,36 @@ app.get('/newPost', (req, res) => {
   res.sendFile(__dirname + '/views/newPost.html')
 });
 
-app.get('/blogData', (req, res) => {
-  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-    console.log(JSON.parse(contents));
-  });
-});
-
-app.get('/blogPost', (req, res) => {
-  res.sendFile(__dirname +  '/views/blogPost.html')
-});
-
 app.post('/publishPost', (req, res)=>{
   const blogAuthor = req.body.blogAuthor;
   const blogTitle = req.body.blogTitle;
   const blogContent = req.body.blogContent;
   const blogDate = new Date(Date.now());
-  console.log(blogDate);
   const data = {
     blogAuthor,
     blogTitle,
     blogContent,
     blogDate
   } 
-  const dataToWrite = ',' +  '\n' + JSON.stringify(data);
+  newBlogPost = data;
+  res.redirect('/blogData')
+});
 
-  fs.appendFile('blogPost.json', dataToWrite, (error)=>{
+let newBlogPost;
+
+app.get('/blogData', (req, res) => {
+  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if(error) throw error;
-    console.log("Data written to file.");
-
+    const object = JSON.parse(contents);
+    object.blogData.push(newBlogPost);
+    const json = JSON.stringify(object);
+    fs.writeFile('blogPost.json', json, 'utf8', (error)=>{
+      if(error){
+        console.log(error);
+      } 
+    });
   });
-  res.redirect('/blogPost')
+  res.sendFile(__dirname +  '/views/blogPost.html')
 });
 
 app.listen(port, () => console.log('Listening on 8080'));
