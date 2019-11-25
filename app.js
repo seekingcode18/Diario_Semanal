@@ -10,6 +10,14 @@ app.use(express.urlencoded({extended: false}));
 app.get('/', (req, res) => {
   res.send('index')
 });
+app.get('/blogPost/:index', (req, res) => {
+  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    if(error) throw error;
+    const object = JSON.parse(contents);
+    object.blogData.push(newBlogPost);
+    
+  });
+})
 
 app.get('/newPost', (req, res) => {
   res.sendFile(__dirname + '/views/newPost.html')
@@ -44,7 +52,12 @@ app.get('/blogData', (req, res) => {
       } 
     });
   });
-  res.sendFile(__dirname +  '/views/blogPost.html')
+  res.redirect('/fetchData');
 });
+  app.get('/fetchData', (req, res) => {
+    
+    res.sendFile(__dirname +  '/views/blogPost.html')
+
+  })
 
 app.listen(port, () => console.log('Listening on 8080'));
