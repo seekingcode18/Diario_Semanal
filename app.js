@@ -14,9 +14,15 @@ app.get('/', (req, res) => {
 app.get('/newPost', (req, res) => {
   res.sendFile(__dirname + '/views/newPost.html')
 });
+
+app.get('/blogData', (req, res) => {
+  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    console.log(JSON.parse(contents));
+  });
+});
+
 app.get('/blogPost', (req, res) => {
   res.sendFile(__dirname +  '/views/blogPost.html')
-    
 });
 
 app.post('/publishPost', (req, res)=>{
