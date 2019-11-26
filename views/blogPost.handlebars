@@ -18,6 +18,7 @@
       <input type="hidden" name="blogTitle" value="{{ title }}">
       <input type="submit" value="submit">
     </form>
+    {{!-- comment section which loops through a comment array and displays all the comments dynamically from app.js --}}
     {{#each comment}}
       <div class="comment__container">
         <h2 class="comment__name">{{this.commentName}}</h2>
