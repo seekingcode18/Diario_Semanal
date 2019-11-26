@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const port = 8080;
 const readWrite = require('./public/readWriteJSON');
-
+const Handlebars = require ("express-handlebars");
+// const template = Handlebars.compile()
 // Import built-in node module to read and write files
 const fs = require('fs'); 
-
+app.engine('handlebars', Handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 app.use('/', express.static('public'));
 app.use('/', express.static('views'));
 app.use(express.urlencoded({extended: false}));
@@ -54,7 +56,15 @@ app.get('/blogData', (req, res) => {
 });
 
 // Render/ show new html file with post information on it
-app.get('/showPost', (req, res) => res.sendFile(__dirname +  '/views/blogPost.html'));
+app.get('/showPost', (req, res) => { 
+  res.render('blogPost', { 
+    title: newBlogPost.blogTitle, 
+    author: newBlogPost.blogAuthor,
+    content: newBlogPost.blogContent,
+    date: newBlogPost.blogDate
+  })
+});
+ 
 
 /*
 How we are tracking posts that we want to access and how the user after submitting
@@ -67,8 +77,9 @@ app.get('/blogPost/:title', (req, res) => {
     const title = req.params.title;
     const object = JSON.parse(contents);
     const currentPost = object.blogData.find(post => post.blogTitle === title);
-    res.send(currentPost);
+    res.sendFile('blogPost.html');
   });
 })
+app.get('/')
 
 app.listen(port, () => console.log('Listening on 8080'));
