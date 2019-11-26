@@ -77,7 +77,8 @@ app.get('/showPost', (req, res) => {
     author: newBlogPost.blogAuthor,
     content: newBlogPost.blogContent,
     date: newBlogPost.blogDate,
-    js: 'blogPost.js'
+    js: 'blogPost.js',
+    comment: newBlogPost.comments
   })
 });
 
@@ -105,6 +106,7 @@ app.post('/writeComment', (req, res)=> {
       commentName: req.body.commentName,
       commentContent: req.body.commentContent
     };
+    newBlogPost.comments.push(newComment); // write new comment to global var so it can be rendered immeditately
     let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
     object.blogData[currentBlogPost].comments.push(newComment);
     const json = JSON.stringify(object);
@@ -114,7 +116,7 @@ app.post('/writeComment', (req, res)=> {
       }
     });
   });
-  res.redirect('showPost')
+  res.redirect('showPost');
 });
 
 app.listen(port, () => console.log('Listening on 8080'));

@@ -18,6 +18,12 @@
       <input type="hidden" name="blogTitle" value="{{ title }}">
       <input type="submit" value="submit">
     </form>
+    {{#each comment}}
+      <div class="comment__container">
+        <h2 class="comment__name">{{this.commentName}}</h2>
+        <p class="comment__content">{{this.commentContent}}</p>
+      </div>
+    {{/each}}
   </main>
   <footer>
     <h3 class="footer__text">Copyright &copy; 2019</h3>
