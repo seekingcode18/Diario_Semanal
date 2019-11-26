@@ -105,10 +105,9 @@ app.post('/writeComment', (req, res)=> {
       commentContent: req.body.commentContent
     };
     let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
-    if(!object.blogData[currentBlogPost].hasOwnProperty('comments')){
-      object.blogData[currentBlogPost].comments = [];
-    }
-    object.blogData.comments.push(newComment);
+    
+    
+    object.blogData[currentBlogPost].comments.push(newComment);
     const json = JSON.stringify(object);
     fs.writeFile('blogPost.json', json, 'utf8', (error)=>{
       if(error){

@@ -5,12 +5,6 @@
   </nav>
 </header>
 <main class="home__container">
-  <div class="preview__container" data-blog-title="First post" id="first-post">
-    <h1 class="preview__title">Blog Post Title</h1>
-    <h2 class="preview__author">John Smith</h2>
-    <p class="preview__date">Date</p>
-    <p class="preview__content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, ea. Aliquam sint quasi eveniet animi, earum cupiditate incidunt, eum maiores ipsam possimus doloremque reiciendis, repellendus nulla enim exercitationem consequatur praesentium.</p>
-  </div>
   {{#each post}}
     <div class="preview__container" data-blog-title="{{this.blogTitle}}" id="next-post">
       <h1 class="preview__title">{{this.blogTitle}}</h1>
