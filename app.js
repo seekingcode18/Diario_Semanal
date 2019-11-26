@@ -97,6 +97,7 @@ app.get('/blogPost/:title', (req, res) => {
 });
 
 app.post('/writeComment', (req, res)=> {
+  console.log('about to write comment...');
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if(error) throw error;
     const object = JSON.parse(contents);
@@ -105,8 +106,6 @@ app.post('/writeComment', (req, res)=> {
       commentContent: req.body.commentContent
     };
     let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
-    
-    
     object.blogData[currentBlogPost].comments.push(newComment);
     const json = JSON.stringify(object);
     fs.writeFile('blogPost.json', json, 'utf8', (error)=>{
@@ -115,6 +114,7 @@ app.post('/writeComment', (req, res)=> {
       }
     });
   });
+  res.redirect('showPost')
 });
 
 app.listen(port, () => console.log('Listening on 8080'));
