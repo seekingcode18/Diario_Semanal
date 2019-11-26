@@ -23,8 +23,11 @@ app.get('/', (req, res) => {
       blogContent: object.blogContent,
       blogDate: object.date
     }
+    console.log(object.blogData);
+    res.render('index', {
+      js: 'index.js', 
+      post: object.blogData})
     });
-  res.render('index', {js: 'index.js'})
 });
 
 //Route to show newPost.html
@@ -63,8 +66,6 @@ app.post('/publishPost', (req, res)=>{
   });
   res.redirect('/showPost');
 });
-
-
 
 // Render / show new blog pages and insert blog post data via handlebars
 app.get('/showPost', (req, res) => {

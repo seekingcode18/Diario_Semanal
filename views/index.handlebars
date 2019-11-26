@@ -11,12 +11,14 @@
     <p class="preview__date">Date</p>
     <p class="preview__content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, ea. Aliquam sint quasi eveniet animi, earum cupiditate incidunt, eum maiores ipsam possimus doloremque reiciendis, repellendus nulla enim exercitationem consequatur praesentium.</p>
   </div>
-  <div class="preview__container" data-blog-title="Another post" id="next-post">
-    <h1 class="preview__title">Blog Post Title 2</h1>
-    <h2 class="preview__author">Mary Johnson</h2>
-    <p class="preview__date">Date</p>
-    <p class="preview__content">Dolor sit amet consectetur adipisicing elit. Hic, ea. Aliquam sint quasi eveniet animi, earum cupiditate incidunt, eum maiores ipsam possimus doloremque reiciendis, repellendus nulla enim exercitationem lorem ipsum consequatur praesentium.</p>
-  </div>
+  {{#each post}}
+    <div class="preview__container" data-blog-title="{{this.blogTitle}}" id="next-post">
+      <h1 class="preview__title">{{this.blogTitle}}</h1>
+      <h2 class="preview__author">{{this.blogAuthor}}</h2>
+      <p class="preview__date">{{this.blogDate}}</p>
+      <p class="preview__content">{{this.blogContent}}</p>
+    </div>
+  {{/each}}
 </main>
 <footer>
   <h3 class="footer__text">Copyright &copy; 2019</h3>

@@ -20,10 +20,10 @@
     </nav>
   </header>
   <main class="home__container">
-    <form action="/publishPost" method="POST" class="newPostForm">
-      <input type="text" name="blogTitle" id="" placeholder="Enter your title here">
-      <input type="text" name="blogAuthor" id="" placeholder="Enter your name here">
-      <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here"></textarea>
+    <form action="/publishPost" method="POST" class="newPostForm" autocomplete="off">
+      <input type="text" name="blogTitle" id="" placeholder="Enter your title here" required>
+      <input type="text" name="blogAuthor" id="" placeholder="Enter your name here" required>
+      <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here" required></textarea>
       <p class="characterCount"></p>
       <input type="submit" value="submit">
     </form>
