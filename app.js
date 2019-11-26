@@ -23,7 +23,9 @@ app.get('/', (req, res) => {
       blogContent: object.blogContent,
       blogDate: object.date
     }
-    console.log(object.blogData);
+    object.blogData.sort((a, b) => {
+      return new Date(b.blogDate) - new Date(a.blogDate);
+    });
     res.render('index', {
       js: 'index.js', 
       post: object.blogData})
@@ -51,7 +53,8 @@ app.post('/publishPost', (req, res)=>{
     blogAuthor : req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
     blogContent: req.body.blogContent,
-    blogDate: new Date()
+    blogDate: new Date(),
+    comments: []
   }
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if(error) throw error;
@@ -73,7 +76,8 @@ app.get('/showPost', (req, res) => {
     title: newBlogPost.blogTitle,
     author: newBlogPost.blogAuthor,
     content: newBlogPost.blogContent,
-    date: newBlogPost.blogDate
+    date: newBlogPost.blogDate,
+    js: 'blogPost.js'
   })
 });
 
@@ -90,6 +94,28 @@ app.get('/blogPost/:title', (req, res) => {
     newBlogPost = object.blogData.find(post => post.blogTitle === title);
     res.redirect('/showPost');
   });
-})
+});
+
+app.post('/writeComment', (req, res)=> {
+  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    if(error) throw error;
+    const object = JSON.parse(contents);
+    const newComment = { 
+      commentName: req.body.commentName,
+      commentContent: req.body.commentContent
+    };
+    let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
+    if(!object.blogData[currentBlogPost].hasOwnProperty('comments')){
+      object.blogData[currentBlogPost].comments = [];
+    }
+    object.blogData.comments.push(newComment);
+    const json = JSON.stringify(object);
+    fs.writeFile('blogPost.json', json, 'utf8', (error)=>{
+      if(error){
+        console.log(error);
+      }
+    });
+  });
+});
 
 app.listen(port, () => console.log('Listening on 8080'));

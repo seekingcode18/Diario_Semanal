@@ -1,4 +1,3 @@
-
   <header>
     <nav>
       <a href="/" class="nav__link">Home</a>
@@ -11,7 +10,14 @@
         <h2 class="post__author">{{ author }}</h2>
         <p class="post__date">{{ date }}</p>
         <p class="post__content">{{ content }}</p>
-      </div>
+    </div>
+    <form action="/writeComment" method="POST">
+      <input type="text" name="commentName" id="" placeholder="Enter your name here">
+      <textarea name="commentContent" id="" maxlength="200"placeholder="Enter your comment here"></textarea>
+      <p class="characterCount"></p>
+      <input type="hidden" name="blogTitle" value="{{ title }}">
+      <input type="submit" value="submit">
+    </form>
   </main>
   <footer>
     <h3 class="footer__text">Copyright &copy; 2019</h3>
