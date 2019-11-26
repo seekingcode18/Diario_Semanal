@@ -1,0 +1,18 @@
+<header>
+  <nav>
+    <a href="/" class="nav__link">Home</a>
+    <a href="/newPost" class="nav__link">New Post</a>
+  </nav>
+</header>
+<main class="home__container">
+  <form action="/publishPost" method="POST" class="newPostForm" autocomplete="off">
+    <input type="text" name="blogTitle" id="" placeholder="Enter your title here" required>
+    <input type="text" name="blogAuthor" id="" placeholder="Enter your name here" required>
+    <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here" required></textarea>
+    <p class="characterCount"></p>
+    <input type="submit" value="submit">
+  </form>
+</main>
+<footer>
+  <h3 class="footer__text">Copyright &copy; 2019</h3>
+</footer>

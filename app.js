@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 //Route to show newPost.html
-app.get('/newPost', (req, res) => res.sendFile(__dirname + '/views/html/newPost.html'));
+app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js'}));
 
 //Made global variable so multiple routes have access to data stored
 let newBlogPost;
