@@ -78,6 +78,7 @@ app.post('/publishPost', (req, res) => {
       laugh: 0,
       shocked: 0
     }
+
   }
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if (error) throw error;
@@ -147,7 +148,25 @@ app.post('/writeComment', (req, res) => {
 });
 
 app.post('/emoji', (req, res) =>{
-  console.log(req);
+  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    if (error) throw error;
+    const object = JSON.parse(contents);
+    const currentBlogPost = object.blogData.findIndex(post => post.blogTitle === newBlogPost.blogTitle)
+    if (req.body.emoji === "&#128077;") {
+      object.blogData[currentBlogPost].blogEmoji.like++;
+    } else if (req.body.emoji === "&#128514;"){
+      object.blogData[currentBlogPost].blogEmoji.laugh++;
+    } else {
+      object.blogData[currentBlogPost].blogEmoji.shocked++;
+    }
+    console.log(object.blogData[currentBlogPost].blogEmoji);
+    const json = JSON.stringify(object);
+    fs.writeFile('blogPost.json', json, 'utf8', (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
+  });
 })
 
 app.listen(port, () => console.log('Listening on 8080'));
