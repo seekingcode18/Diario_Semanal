@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
 const port = 8080;
-const readWrite = require('./public/readWriteJSON');
 
 // const template = Handlebars.compile()
 const Handlebars = require("express-handlebars");
 
 // Import built-in node module to read and write files
 const fs = require('fs');
+
+//Import readWrite functionality for JSON from separate JS
+const readWrite = require('./src/readWriteJSON');
+const readJSON = require('./src/readWriteJSON').read;
 
 app.engine('handlebars', Handlebars({
   defaultLayout: 'main'
@@ -54,8 +57,6 @@ app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js'}));
 //Made global variable so multiple routes have access to data stored
 let newBlogPost;
 
-
-
 /*
 When the new blog is submitted, the data is stored in a global variable
 After the data from the form is assigned to the global variable
@@ -78,18 +79,12 @@ app.post('/publishPost', (req, res) => {
       laugh: 0,
       shocked: 0
     }
-
   }
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if (error) throw error;
     const object = JSON.parse(contents);
     object.blogData.push(newBlogPost);
-    const json = JSON.stringify(object);
-    fs.writeFile('blogPost.json', json, 'utf8', (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
+    readWrite.write(object);
   });
   res.redirect('/showPost');
 });
@@ -123,13 +118,15 @@ app.get('/blogPost/:title', (req, res) => {
     res.redirect('/showPost');
   });
 });
+
 /* read the json and turn contents into object, then get the comment from the form data and assign it to new comment object. 
 We then push the new comment object into the global variable comments array inside it. 
   */ 
 app.post('/writeComment', (req, res) => {
-  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-    if (error) throw error;
-    const object = JSON.parse(contents);
+  const object = readJSON();
+  // fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+  //   if (error) throw error;
+  //   const object = JSON.parse(contents);
     const newComment = {
       commentName: req.body.commentName,
       commentContent: req.body.commentContent
@@ -137,13 +134,8 @@ app.post('/writeComment', (req, res) => {
     newBlogPost.comments.push(newComment); // write new comment to global var so it can be rendered immeditately
     let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
     object.blogData[currentBlogPost].comments.push(newComment);
-    const json = JSON.stringify(object);
-    fs.writeFile('blogPost.json', json, 'utf8', (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
-  });
+    readWrite.write(object);
+  //});
   res.redirect('showPost');
 });
 
@@ -152,7 +144,6 @@ app.post('/emoji', (req, res) =>{
     if (error) throw error;
     const object = JSON.parse(contents);
     const currentBlogPost = object.blogData.findIndex(post => post.blogTitle === newBlogPost.blogTitle)
-    console.log(req.body.emoji);
     if (req.body.emoji === 'like') {
       object.blogData[currentBlogPost].blogEmoji.like++;
     } else if (req.body.emoji === 'laugh'){
@@ -160,12 +151,7 @@ app.post('/emoji', (req, res) =>{
     } else {
       object.blogData[currentBlogPost].blogEmoji.shocked++;
     }
-    const json = JSON.stringify(object);
-    fs.writeFile('blogPost.json', json, 'utf8', (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
+    readWrite.write(object);
   });
   //  204 - req uest has succeeded but the client doesn't need to leave the current page
   res.status(204).send();
