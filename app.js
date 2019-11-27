@@ -104,7 +104,7 @@ app.get('/showPost', (req, res) => {
     gif: newBlogPost.blogGif,
     js: 'blogPost.js',
     comment: newBlogPost.comments,
-    emoji: newBlogPost.emoji
+    emoji: newBlogPost.blogEmoji
   })
 });
 
@@ -152,14 +152,14 @@ app.post('/emoji', (req, res) =>{
     if (error) throw error;
     const object = JSON.parse(contents);
     const currentBlogPost = object.blogData.findIndex(post => post.blogTitle === newBlogPost.blogTitle)
-    if (req.body.emoji === "&#128077;") {
+    console.log(req.body.emoji);
+    if (req.body.emoji === 'like') {
       object.blogData[currentBlogPost].blogEmoji.like++;
-    } else if (req.body.emoji === "&#128514;"){
+    } else if (req.body.emoji === 'laugh'){
       object.blogData[currentBlogPost].blogEmoji.laugh++;
     } else {
       object.blogData[currentBlogPost].blogEmoji.shocked++;
     }
-    console.log(object.blogData[currentBlogPost].blogEmoji);
     const json = JSON.stringify(object);
     fs.writeFile('blogPost.json', json, 'utf8', (error) => {
       if (error) {
@@ -167,6 +167,8 @@ app.post('/emoji', (req, res) =>{
       }
     });
   });
+  //  204 - req uest has succeeded but the client doesn't need to leave the current page
+  res.status(204).send();
 })
 
 app.listen(port, () => console.log('Listening on 8080'));

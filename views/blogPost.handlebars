@@ -20,20 +20,18 @@
     <input type="submit" value="submit">
   </form>
   <form class="emoji__container" action="/emoji" method="POST">
-
     <div class="emoji__inner" id="like">
-      <input type="submit" class="emoji__pic" value="&#128077;" name="emoji">
-      <p class="emoji__count"></p>
+      <button type="submit" class="emoji__pic" value="like" id="test" name="emoji">&#128077;</button>
+      <p class="emoji__count">{{ emoji.like }}</p>
     </div>
     <div class="emoji__inner" id="laugh">
-      <input type="submit" class="emoji__pic" value="&#128514;" name="emoji">
-      <p class="emoji__count"></p>
+      <button type="submit" class="emoji__pic" value="laugh" id="test" name="emoji">&#128514;</button>
+      <p class="emoji__count">{{ emoji.laugh }}</p>
     </div>
     <div class="emoji__inner" id="shocked">
-      <input type="submit" class="emoji__pic" value="&#128561;" name="emoji">
-      <p class="emoji__count"></p>
+      <button type="submit" class="emoji__pic" value="shocked" id="test" name="emoji">&#128561;</button>
+      <p class="emoji__count">{{ emoji.shocked }}</p>
     </div>
-
   </form>
   {{!-- comment section which loops through a comment array and displays all the comments dynamically from app.js --}}
   {{#each comment}}
