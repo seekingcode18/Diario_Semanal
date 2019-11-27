@@ -5,4 +5,9 @@ $(document).ready(() => {
       const textareaLength = $("textarea").val().length;
       $('.characterCount').html(`Remaining characters: ${200 - textareaLength}`) 
   });
+
+  // $('.emoji__pic').click(event =>{
+  //   event.preventDefault();
+  //   console.log(event.currentTarget.parentElement.id);
+  // })
 })

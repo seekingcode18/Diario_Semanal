@@ -72,7 +72,12 @@ app.post('/publishPost', (req, res) => {
     blogContent: req.body.blogContent,
     blogGif: JSON.parse(req.body.gifBuffer),
     blogDate: new Date(),
-    comments: []
+    comments: [],
+    blogEmoji: {
+      like: 0,
+      laugh: 0,
+      shocked: 0
+    }
   }
   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
     if (error) throw error;
@@ -97,7 +102,8 @@ app.get('/showPost', (req, res) => {
     date: newBlogPost.blogDate,
     gif: newBlogPost.blogGif,
     js: 'blogPost.js',
-    comment: newBlogPost.comments
+    comment: newBlogPost.comments,
+    emoji: newBlogPost.emoji
   })
 });
 
@@ -139,5 +145,9 @@ app.post('/writeComment', (req, res) => {
   });
   res.redirect('showPost');
 });
+
+app.post('/emoji', (req, res) =>{
+  console.log(req);
+})
 
 app.listen(port, () => console.log('Listening on 8080'));
