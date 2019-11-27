@@ -21,7 +21,7 @@ $(document).ready(() => {
           });
           console.log('after', gifList);
           gifList.forEach(gifURL => {
-            $('.gifs__display').append(`<div class="gif__wrapper"><img src=${gifURL.url} alt=${gifURL.title}></div>`);
+            $('.gifs__display').append(`<div class="gif__wrapper"><img src=${gifURL.url} alt="${gifURL.title}"></div>`);
           });
         })
         //loops through all of the images after they've been dislayed and appended, and listens for a click 
@@ -30,7 +30,10 @@ $(document).ready(() => {
           document.querySelectorAll('.gif__wrapper').forEach(div => {
             div.addEventListener('click', event => {
               // insert one gif into the json using the post request
-              $('#gifBuffer').val(event.currentTarget.firstChild.src);
+              $('#gifBuffer').val(JSON.stringify({
+                title: event.currentTarget.firstChild.alt,
+                url: event.currentTarget.firstChild.src
+              }));
             })
           });
         })

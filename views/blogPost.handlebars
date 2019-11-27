@@ -19,6 +19,20 @@
       <input type="hidden" name="blogTitle" value="{{ title }}">
       <input type="submit" value="submit">
     </form>
+    <ul class="emoji__container">
+      <li class="emoji__inner" id="like">
+        <p class="emoji__pic">&#128077;</p>
+        <p class="emoji__count"></p>
+      </li>
+      <li class="emoji__inner" id="laugh">
+        <p class="emoji__pic">&#128514;</p>
+        <p class="emoji__count"></p>
+      </li>
+      <li class="emoji__inner" id="shocked">
+        <p class="emoji__pic">&#128561;</p>
+        <p class="emoji__count"></p>
+      </li>
+    </ul>
     {{!-- comment section which loops through a comment array and displays all the comments dynamically from app.js --}}
     {{#each comment}}
       <div class="comment__container">

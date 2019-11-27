@@ -64,11 +64,13 @@ then turn it back into a string and overwrite the JSON file. Then we redirect
 to /showPost
 */
 app.post('/publishPost', (req, res) => {
+  console.log(req.body);
+  console.log(req.body.gifBuffer);
   newBlogPost = {
     blogAuthor: req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
     blogContent: req.body.blogContent,
-    blogGif: req.body.gifBuffer,
+    blogGif: JSON.parse(req.body.gifBuffer),
     blogDate: new Date(),
     comments: []
   }
