@@ -68,6 +68,7 @@ app.post('/publishPost', (req, res) => {
     blogAuthor: req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
     blogContent: req.body.blogContent,
+    blogGif: req.body.gifBuffer,
     blogDate: new Date(),
     comments: []
   }
@@ -92,6 +93,7 @@ app.get('/showPost', (req, res) => {
     author: newBlogPost.blogAuthor,
     content: newBlogPost.blogContent,
     date: newBlogPost.blogDate,
+    gif: newBlogPost.blogGif,
     js: 'blogPost.js',
     comment: newBlogPost.comments
   })

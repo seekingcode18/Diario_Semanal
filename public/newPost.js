@@ -12,6 +12,7 @@ $(document).ready(() => {
       fetch(apiCall)
         .then(res => res.text())
         .then(res => {
+          console.log(res);
           let gifList = JSON.parse(res).data.map(gif => gif.images.fixed_height_downsampled.url);
           gifList.forEach(gifURL => {
             $('.gifs__display').append(`<div class="gif__wrapper"><img src=${gifURL}></div>`);
@@ -22,14 +23,11 @@ $(document).ready(() => {
         .then(res => {
           document.querySelectorAll('.gif__wrapper').forEach(div => {
             div.addEventListener('click', event => {
-              console.log(event.currentTarget);
-              $('#gifBuffer').value = event.currentTarget.src;
-              console.log($('#gifBuffer').val());
+              // insert one gif into the json using the post request
+              $('#gifBuffer').val(event.currentTarget.firstChild.src);
             })
           });
-
         })
     }
   })
-
 });

@@ -10,6 +10,7 @@
         <h2 class="post__author">{{ author }}</h2>
         <p class="post__date">{{ date }}</p>
         <p class="post__content">{{ content }}</p>
+        <div class="gif__container"><img src="{{ gif }}" alt=""></div>
     </div>
     <form action="/writeComment" method="POST">
       <input type="text" name="commentName" id="" placeholder="Enter your name here">
