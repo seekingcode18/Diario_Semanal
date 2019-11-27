@@ -1,25 +1,40 @@
 const fs = require("fs");
-module.exports = {
-    read: function(){
-        return fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-            if(error) throw error;
-            return object = JSON.parse(contents);
-        })
-    },
-    prepHomePosts: function(object){
+const write = (object) => {
+    fs.writeFile('blogPost.json', JSON.stringify(object), 'utf8', (error) => {
+        if (error) console.log(error);
+    });
+}
+
+const displayAllPosts = (res) => {
+    fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+        if (error) throw error;
+        const object = JSON.parse(contents);
         newBlogPost = {
             blogAuthor: object.blogAuthor,
             blogTitle: object.blogTitle,
             blogContent: object.blogContent,
             blogDate: object.date
         }
-    },
-    insertNewBlog: function(req){
-        const parsedJSON = this.read();
-    },
-    write: function(object){
-        fs.writeFile('blogPost.json', JSON.stringify(object), 'utf8', (error) => {
-          if (error) console.log(error);
-        });
-    }
-}
+        //putting date in reverse chronological order
+        object.blogData.sort((a, b) => new Date(b.blogDate) - new Date(a.blogDate));
+        //rendering handlebar templates for the homepage and sending a reference to the javascript file
+        res.render('index', {
+            js: 'index.js',
+            post: object.blogData
+        })
+        //post is an array that the forEach is looping through in index.handlebars
+    })
+};
+const handlePostData = (req) => {
+   fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+        if (error) throw error;
+        const object = JSON.parse(contents);
+        object.blogData.push(newBlogPost);
+        write(object);
+    })
+};
+module.exports = {
+    displayAllPosts,
+    write,
+    handlePostData
+};

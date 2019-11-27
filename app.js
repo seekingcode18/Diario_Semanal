@@ -28,28 +28,7 @@ app.use(express.urlencoded({
 /*read json and assign it to the global variable, so we can use it sort it in reverse cronological order
 
  */
-app.get('/', (req, res) => {
-  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-    if (error) throw error;
-    const object = JSON.parse(contents);
-    newBlogPost = {
-      blogAuthor: object.blogAuthor,
-      blogTitle: object.blogTitle,
-      blogContent: object.blogContent,
-      blogDate: object.date
-    }
-    //putting date in reverse chronological order
-    object.blogData.sort((a, b) => {
-      return new Date(b.blogDate) - new Date(a.blogDate);
-    });
-    //rendering handlebar templates for the homepage and sending a reference to the javascript file
-    res.render('index', {
-      js: 'index.js',
-      //post is an array that the forEach is looping through in index.handlebars
-      post: object.blogData
-    })
-  });
-});
+app.get('/', (req, res) => readWrite.displayAllPosts(res));
 
 //Route to show newPost.handlebars
 app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js'}));
@@ -65,8 +44,6 @@ then turn it back into a string and overwrite the JSON file. Then we redirect
 to /showPost
 */
 app.post('/publishPost', (req, res) => {
-  console.log(req.body);
-  console.log(req.body.gifBuffer);
   newBlogPost = {
     blogAuthor: req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
@@ -80,12 +57,7 @@ app.post('/publishPost', (req, res) => {
       shocked: 0
     }
   }
-  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-    if (error) throw error;
-    const object = JSON.parse(contents);
-    object.blogData.push(newBlogPost);
-    readWrite.write(object);
-  });
+  readWrite.handlePostData(req);
   res.redirect('/showPost');
 });
 
