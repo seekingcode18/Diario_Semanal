@@ -33,8 +33,21 @@ const handlePostData = (req) => {
         write(object);
     })
 };
+const newComment = (req) => {  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    if (error) throw error;
+    const object = JSON.parse(contents);
+    const newComment = {
+      commentName: req.body.commentName,
+      commentContent: req.body.commentContent
+    };
+    newBlogPost.comments.push(newComment); // write new comment to global var so it can be rendered immeditately
+    let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
+    object.blogData[currentBlogPost].comments.push(newComment);
+    write(object);
+})};
 module.exports = {
     displayAllPosts,
     write,
-    handlePostData
+    handlePostData,
+    newComment
 };
