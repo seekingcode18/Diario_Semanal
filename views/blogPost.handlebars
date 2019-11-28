@@ -1,24 +1,17 @@
 <header>
   <nav>
-    <a href="/" class="nav__link">Home</a>
+    <a href="/"><h1>Diario Semanal</h1></a>
     <a href="/newPost" class="nav__link">New Post</a>
   </nav>
 </header>
 <main class="home__container">
   <div class="post__container">
-    <h1 class="post__title">{{ title }}</h1>
-    <h2 class="post__author">{{ author }}</h2>
+    <h2 class="post__title">{{ title }}</h2>
+    <p class="post__author">{{ author }}</p>
     <p class="post__date">{{ date }}</p>
     <p class="post__content">{{ content }}</p>
     <div class="gif__container"><img src="{{ gif.url }}" alt="{{ gif.title }}"></div>
   </div>
-  <form action="/writeComment" method="POST">
-    <input type="text" name="commentName" id="" placeholder="Enter your name here" autocomplete="off">
-    <textarea name="commentContent" id="" maxlength="200" placeholder="Enter your comment here" autocomplete="off"></textarea>
-    <p class="characterCount"></p>
-    <input type="hidden" name="blogTitle" value="{{ title }}">
-    <input type="submit" value="submit">
-  </form>
   <form class="emoji__container" action="/emoji" method="POST">
     <div class="emoji__inner" id="like">
       <button type="submit" class="emoji__pic" value="like" id="test" name="emoji">&#128077;</button>
@@ -33,14 +26,20 @@
       <p class="emoji__count">{{ emoji.shocked }}</p>
     </div>
   </form>
+  <p class="comment__labels">Enter a new comment</p>
+  <form class="comment__form" action="/writeComment" method="POST">
+    <input type="text" name="commentName" id="" placeholder="Enter your name here" autocomplete="off">
+    <textarea name="commentContent" id="" maxlength="200" placeholder="Enter your comment here" autocomplete="off"></textarea>
+    <p class="characterCount"></p>
+    <input type="hidden" name="blogTitle" value="{{ title }}">
+    <input type="submit" value="Submit">
+  </form>
+  <p class="comment__labels">Comments</p>
   {{!-- comment section which loops through a comment array and displays all the comments dynamically from app.js --}}
   {{#each comment}}
   <div class="comment__container">
-    <h2 class="comment__name">{{this.commentName}}</h2>
+    <p class="comment__name">{{this.commentName}}</p>
     <p class="comment__content">{{this.commentContent}}</p>
   </div>
   {{/each}}
 </main>
-<footer>
-  <h3 class="footer__text">Copyright &copy; 2019</h3>
-</footer>

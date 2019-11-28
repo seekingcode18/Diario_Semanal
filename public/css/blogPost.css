@@ -1,5 +1,161 @@
 * {
-padding: 0;
-margin: 0;
-}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  h1 {
+    font-size: 35px;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  .nav__link {
+    transition: 0.4s border;
+    border-bottom: 1px solid #424b54;
+  }
+  
+  .nav__link:hover {
+    border-bottom: 1px solid #ffffff;
+  }
+  
+  header {
+    padding: 15px 0;
+    background: #424b54;
+  }
+  
+  nav {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0 5% 0 10%;
+  }
+  
+  .home__container {
+    width: 80%;
+    margin: auto;
+    padding: 20px 0;
+  }
+  
+  .post__container{
+      padding: 10px;
+      line-height: 1.7;
+  }
+
+  .post__title{
+      font-size: 30px;
+      padding-bottom: 10px;
+  }
+
+  .post__author{
+      font-size: 21px;
+      font-style: italic;
+  }
+
+  .post__date{
+      padding-bottom: 15px;
+  }
+
+  .post__content{
+      margin-bottom: 50px;
+  }
+
+  .gif__container{
+      margin-bottom: 30px;
+  }
+
+  .comment__form{
+      position: relative;
+      bottom: 20px;
+      padding: 10px;
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 30%;
+  }
+
+  input[type="text"]{
+      height: 35px;
+      border: 0;
+      border-bottom: 1px solid #818991;
+      font-family: 'Montserrat', sans-serif;
+  }
+
+  textarea {
+    margin: 10px 0;
+    border: 0;
+    border-bottom: 1px solid #818991;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  input[type="submit"] {
+    width: 100px;
+    height: 35px;
+    margin: 10px 0;
+    border: 0;
+    background: #b2ceea;
+    font-family: 'Montserrat', sans-serif;
+    border: #b2ceea 1px solid;
+    transition: 0.3s;
+  }
+  
+  input[type="submit"]:hover {
+    box-shadow: 2px 2px 2px #999;
+    cursor: pointer;
+    border: #424b54 1px solid;
+  }
+
+  .emoji__container{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-bottom: 20px;
+  }
+
+  .emoji__inner{
+      padding: 0 4px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .emoji__pic{
+      font-size: 30px;
+      background: white;
+      border: 0;
+      cursor: pointer;
+      margin-bottom: 5px;
+  }
+
+  ::placeholder{
+      color: #000000;
+  }
+
+  .comment__container{
+      margin-top: 20px;
+  }
+
+  .comment__name{
+      font-size: 14px;
+      padding-bottom: 5px;
+      font-style: italic;
+  }
+
+  .comment__labels{
+      font-size: 20px;
+  }
 
