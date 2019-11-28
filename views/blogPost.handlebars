@@ -10,7 +10,6 @@
     <h2 class="post__author">{{ author }}</h2>
     <p class="post__date">{{ date }}</p>
     <p class="post__content">{{ content }}</p>
-    {{!-- insert the url and title for the src and alt attributes of the gif --}}
     <div class="gif__container"><img src="{{ gif.url }}" alt="{{ gif.title }}"></div>
   </div>
   <form action="/writeComment" method="POST">

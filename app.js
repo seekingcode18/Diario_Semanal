@@ -9,7 +9,7 @@ const Handlebars = require("express-handlebars");
 const fs = require('fs');
 
 //Import readWrite functionality for JSON from separate JS
-const readWrite = require('./src/readWriteJSON');
+const readWrite = require('./lib/readWriteJSON');
 
 app.engine('handlebars', Handlebars({
   defaultLayout: 'main'
@@ -53,7 +53,7 @@ app.post('/publishPost', (req, res) => {
       shocked: 0
     }
   }
-  readWrite.handlePostData(req);
+  readWrite.handlePostData(req, newBlogPost);
   res.redirect('/showPost');
 });
 
@@ -91,19 +91,7 @@ app.get('/blogPost/:title', (req, res) => {
 We then push the new comment object into the global variable comments array inside it. 
   */ 
 app.post('/writeComment', (req, res) => {
-  fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-    if (error) throw error;
-    const object = JSON.parse(contents);
-    const newComment = {
-      commentName: req.body.commentName,
-      commentContent: req.body.commentContent
-    };
-    newBlogPost.comments.push(newComment); // write new comment to global var so it can be rendered immeditately
-    let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
-    object.blogData[currentBlogPost].comments.push(newComment);
-    readWrite.write(object);
-  });
-  // readWrite.newComment(req);
+  readWrite.newComment(req, newBlogPost);
   res.redirect('showPost');
 });
 
