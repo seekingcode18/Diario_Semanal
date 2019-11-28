@@ -4,6 +4,15 @@
     <a href="/newPost" class="nav__link">New Post</a>
   </nav>
 </header>
+<section class="banner">
+  <div class="banner__left">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, quae!</p>
+  </div>
+  <div class="banner__right">
+    <img src= "../images/coffee.jpg" alt="coffee and book">
+  </div>
+  
+</section>
 <main class="home__container">
   {{!-- handlebars for loop function.
   everything is pre preview container will be created for each item inside the 'post' array, which is coming from our index route 
@@ -14,6 +23,7 @@
       <p class="preview__author">{{this.blogAuthor}}</p>
       <p class="preview__date">{{this.blogDate}}</p>
       <p class="preview__content">{{this.blogContent}}</p>
+      <div class="fadeOut"></div>
     </div>
   {{/each}}
 </main>

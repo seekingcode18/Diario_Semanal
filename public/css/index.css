@@ -42,6 +42,15 @@ nav {
   margin: 0 5% 0 10%;
 }
 
+.banner{
+  background-image: url("../images/coffee.jpg");
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+}
+
 .home__container {
   width: 80%;
   margin: auto;
@@ -51,27 +60,35 @@ nav {
 .preview__container {
   margin-bottom: 20px;
   padding: 10px;
-  height: 150px;
+  height: 200px;
   overflow: hidden;
   box-shadow: 0px 0px 0px 1px #aeb9c4;
+  position: relative;
 }
 
 .preview__container:hover {
   box-shadow: 1px 1px 6px 1px #aeb9c4;
 }
 
-.preview__title {
-
+.fadeOut{
+  position: absolute; 
+  bottom: 0;
+  width:100%;
+  height: 4em;
+  background-image: linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
 }
 
 .preview__title {
-
+  padding-bottom: 10px;
 }
 
-.preview__title {
-
+.preview__author {
+  padding-bottom: 5px;
 }
 
-.preview__title {
-
+.preview__date {
+  padding-bottom: 10px;
 }
