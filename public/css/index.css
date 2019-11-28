@@ -59,8 +59,8 @@ nav {
   background: rgba(0, 0, 0, 0.3);
   font-size: 25px;
   line-height: 1.5;
-  color:#424b54;
-  text-shadow: 2px 2px 2px white;
+  color:#d7e4f2;
+  padding: 0 10%;
 }
 
 .home__container {

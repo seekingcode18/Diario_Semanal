@@ -1,12 +1,135 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav__link {
+  transition: 0.4s border;
+  border-bottom: 1px solid #424b54;
+}
+
+.nav__link:hover {
+  border-bottom: 1px solid #ffffff;
+}
+
+header {
+  padding: 15px 0;
+  background: #424b54;
+}
+
+nav {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 5% 0 10%;
+}
+
+.home__container {
+  width: 80%;
+  margin: auto;
+  padding: 40px 0;
+}
+
+.page__title {
+  font-size: 30px;
+  padding-bottom: 20px;
 }
 
 .newPostForm{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 768px;
-    margin:auto
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin:20%;
+}
+
+form {
+  position: relative;
+  bottom: 20px;
+  padding: 10px;
+  
+}
+
+.newPostForm {
+  box-shadow: 3px 3px 10px 0px #aeb9c4;
+  margin: 15px 0;
+}
+
+input[type="text"] {
+  height: 35px;
+  border: 0;
+  border-bottom: 1px solid #818991;
+  font-family: 'Montserrat', sans-serif;
+}
+
+::placeholder {
+  color: #000000;
+
+}
+
+textarea {
+  margin: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #818991;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input[type="submit"] {
+  width: 100px;
+  height: 35px;
+  margin: 10px 0;
+  border: 0;
+  background: #b2ceea;
+  font-family: 'Montserrat', sans-serif;
+  border: #b2ceea 1px solid;
+  transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+  box-shadow: 2px 2px 2px #999;
+  cursor: pointer;
+  border: #424b54 1px solid;
+}
+
+.gifs__form {
+  margin: 20px 0;
+}
+
+.gifs__display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: auto;
+  width: 80%;
+  margin: auto;
+  padding: 40px 0;
+}
+
+.gifs__display > * {
+  padding: 10px;
+  /* width: 200px; */
+  /* overflow: hidden; */
+}
+
+.gifs__display > *:active {
+  border: #79ace0 3px solid
 }
