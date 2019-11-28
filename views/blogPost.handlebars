@@ -13,8 +13,8 @@
     <div class="gif__container"><img src="{{ gif.url }}" alt="{{ gif.title }}"></div>
   </div>
   <form action="/writeComment" method="POST">
-    <input type="text" name="commentName" id="" placeholder="Enter your name here">
-    <textarea name="commentContent" id="" maxlength="200" placeholder="Enter your comment here"></textarea>
+    <input type="text" name="commentName" id="" placeholder="Enter your name here" autocomplete="off">
+    <textarea name="commentContent" id="" maxlength="200" placeholder="Enter your comment here" autocomplete="off"></textarea>
     <p class="characterCount"></p>
     <input type="hidden" name="blogTitle" value="{{ title }}">
     <input type="submit" value="submit">

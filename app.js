@@ -85,6 +85,7 @@ app.get('/blogPost/:title', (req, res) => {
     newBlogPost = object.blogData.find(post => post.blogTitle === title);
     res.redirect('/showPost');
   });
+//  readWrite.findBlogPost(req, res, newBlogPost);
 });
 
 /* read the json and turn contents into object, then get the comment from the form data and assign it to new comment object. 

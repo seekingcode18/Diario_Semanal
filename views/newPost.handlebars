@@ -6,9 +6,9 @@
 </header>
 <main class="home__container">
   <form action="/publishPost" method="POST" class="newPostForm" autocomplete="off">
-    <input type="text" name="blogTitle" id="" placeholder="Enter your title here" required>
+    <input type="text" name="blogTitle" id="" placeholder="Enter your title here" autocomplete="off" required>
     <input type="text" name="blogAuthor" id="" placeholder="Enter your name here" required>
-    <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here" required></textarea>
+    <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here" autocomplete="off" required></textarea>
     <input type="hidden" name="gifBuffer" id="gifBuffer">
     <p class="characterCount"></p>
     <input type="submit" value="submit">
@@ -16,8 +16,8 @@
   {{!-- giffs container! includes the form to search for a gif --}}
   <div class="gifs__container">
     <form action="">
-      <input type="text" name="searchGifs" id="gifSearch" placeholder="search for a gif">
-      <input type="submit" value="search" id="gifSubmit">
+      <input type="text" name="searchGifs" id="gifSearch" placeholder="search for a gif" autocomplete="off" required>
+      <input type="submit" value="search" id="gifSubmit" autocomplete="off" required>
     </form>
     {{!-- empty div to insert gifs into from newPost.js--}}
     <div class="gifs__display">
