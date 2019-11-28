@@ -10,7 +10,6 @@ const fs = require('fs');
 
 //Import readWrite functionality for JSON from separate JS
 const readWrite = require('./src/readWriteJSON');
-const readJSON = require('./src/readWriteJSON').read;
 
 app.engine('handlebars', Handlebars({
   defaultLayout: 'main'
@@ -24,10 +23,7 @@ app.use(express.urlencoded({
   extended: false
 }));
 
-// render index.handlebars on home root route
-/*read json and assign it to the global variable, so we can use it sort it in reverse cronological order
-
- */
+// render index.handlebars on home root route with all posts
 app.get('/', (req, res) => readWrite.displayAllPosts(res));
 
 //Route to show newPost.handlebars
@@ -125,7 +121,7 @@ app.post('/emoji', (req, res) =>{
     }
     readWrite.write(object);
   });
-  //  204 - req uest has succeeded but the client doesn't need to leave the current page
+  //  204 - request has succeeded but the client doesn't need to leave the current page
   res.status(204).send();
 })
 

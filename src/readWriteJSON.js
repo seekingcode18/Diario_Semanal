@@ -4,7 +4,9 @@ const write = (object) => {
         if (error) console.log(error);
     });
 }
+/*read json and assign it to the global variable, so we can use it sort it in reverse cronological order
 
+ */
 const displayAllPosts = (res) => {
     fs.readFile('blogPost.json', 'utf8', (error, contents) => {
         if (error) throw error;
