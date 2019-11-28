@@ -80,6 +80,7 @@ nav {
 
 .preview__container:hover {
   box-shadow: 1px 1px 6px 1px #aeb9c4;
+  cursor: pointer;
 }
 
 .fadeOut{
