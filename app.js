@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+const path = require('path');
 
 // const template = Handlebars.compile()
 const Handlebars = require("express-handlebars");
@@ -17,8 +18,8 @@ app.engine('handlebars', Handlebars({
 
 //handlebars view engine which tells the computer which way do we need to render the files 
 app.set('view engine', 'handlebars');
-app.use('/', express.static('public'));
 app.use('/', express.static('views'));
+app.use('/', express.static('public'));
 app.use(express.urlencoded({
   extended: false
 }));
@@ -27,7 +28,7 @@ app.use(express.urlencoded({
 app.get('/', (req, res) => readWrite.displayAllPosts(res));
 
 //Route to show newPost.handlebars
-app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js'}));
+app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js', css: 'newPost.css'}));
 
 //Made global variable so multiple routes have access to data stored
 let newBlogPost;
@@ -66,6 +67,7 @@ app.get('/showPost', (req, res) => {
     date: newBlogPost.blogDate,
     gif: newBlogPost.blogGif,
     js: 'blogPost.js',
+    css: 'blogPost.css',
     comment: newBlogPost.comments,
     emoji: newBlogPost.blogEmoji
   })
