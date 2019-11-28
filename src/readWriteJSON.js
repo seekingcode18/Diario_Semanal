@@ -8,7 +8,7 @@ const write = (object) => {
 
  */
 const displayAllPosts = (res) => {
-    fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+    fs.readFileSync('blogPost.json', 'utf8', (error, contents) => {
         if (error) throw error;
         const object = JSON.parse(contents);
         newBlogPost = {
@@ -19,6 +19,7 @@ const displayAllPosts = (res) => {
         }
         //putting date in reverse chronological order
         object.blogData.sort((a, b) => new Date(b.blogDate) - new Date(a.blogDate));
+        
         //rendering handlebar templates for the homepage and sending a reference to the javascript file
         res.render('index', {
             js: 'index.js',
@@ -48,22 +49,22 @@ const newComment = (req) => {  fs.readFile('blogPost.json', 'utf8', (error, cont
     write(object);
 })};
 
-// const findBlogPost = (req, res, newBlogPost) =>{
-//     console.log('2', newBlogPost);
-//     fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-//         if (error) throw error;
-//         const title = req.params.title;
-//         const object = JSON.parse(contents);
-//         //newBlogPost = object.blogData.find(post => post.blogTitle === title);
-//         console.log('3', newBlogPost);
-//         res.redirect('/showPost');
-//     });
-// }
+ const showAllAuthors = () => {
+    let authorArray;
+
+    fs.readFile('blogPost.json', 'utf8', (error, contents) => {
+        if (error) throw error;
+        const object = JSON.parse(contents);
+        authorArray = object.blogData.map(blog => blog.blogAuthor)
+    });
+    return authorArray;     
+}
+ 
 
 module.exports = {
     displayAllPosts,
     write,
     handlePostData,
-    newComment
-    //findBlogPost
+    newComment,
+    showAllAuthors
 };

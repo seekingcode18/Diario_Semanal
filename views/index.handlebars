@@ -5,10 +5,14 @@
   </nav>
 </header>
 <main class="home__container">
+<div class="authors__container">
+  
+</div>
+
   {{!-- handlebars for loop function.
   everything is pre preview container will be created for each item inside the 'post' array, which is coming from our index route 
   in app.js  --}}
-  {{#each post}}
+{{#each post}}
     <div class="preview__container" data-blog-title="{{this.blogTitle}}" id="next-post">
       <h1 class="preview__title">{{this.blogTitle}}</h1>
       <h2 class="preview__author">{{this.blogAuthor}}</h2>

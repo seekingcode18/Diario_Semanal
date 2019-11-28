@@ -114,4 +114,18 @@ app.post('/emoji', (req, res) =>{
   res.status(204).send();
 })
 
+
+
+app.get('*', (req,res, next) => {
+  let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
+  err.statusCode = 404; 
+  next(err);
+})
+app.use( (err, req, res, next) => {
+  console.error(err.message); 
+  if (!err.statusCode) err.statusCode = 500; 
+    res.status(err.statusCode).render('errorPage');
+} )
+
+
 app.listen(port, () => console.log('Listening on 8080'));
