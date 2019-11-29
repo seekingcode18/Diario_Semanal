@@ -1,10 +1,6 @@
 const express = require('express');
 const app = express();
 const port = 8080;
-const path = require('path');
-
-// const template = Handlebars.compile()
-const Handlebars = require("express-handlebars");
 
 // Import built-in node module to read and write files
 const fs = require('fs');
@@ -12,29 +8,30 @@ const fs = require('fs');
 //Import readWrite functionality for JSON from separate JS
 const readWrite = require('./lib/readWriteJSON');
 
-app.engine('handlebars', Handlebars({
-  defaultLayout: 'main'
-}));
+// const template = Handlebars.compile()
+const Handlebars = require("express-handlebars");
+
+//setting main.handlebars as our default layout
+app.engine('handlebars', Handlebars({defaultLayout: 'main'}));
 
 //handlebars view engine which tells the computer which way do we need to render the files 
 app.set('view engine', 'handlebars');
 app.use('/', express.static('views'));
 app.use('/', express.static('public'));
-app.use(express.urlencoded({
-  extended: false
-}));
+//lets us read the body of the url query (that's how we get req.body)
+app.use(express.urlencoded({extended: false}));
 
 // load favicon
 app.use('/favicon.ico', express.static(__dirname + '/public/images/favicon.ico'));
 
-// render index.handlebars on home root route with all posts
+//Made global variable so multiple routes have access to data stored
+let newBlogPost;
+
+// render index.handlebars on home root route with all posts, res is sent into displayAllPosts funciton so that we can render the index page
 app.get('/', (req, res) => readWrite.displayAllPosts(res));
 
 //Route to show newPost.handlebars
 app.get('/newPost', (req, res) => res.render('newPost', {js: 'newPost.js', css: 'newPost.css'}));
-
-//Made global variable so multiple routes have access to data stored
-let newBlogPost;
 
 /*
 When the new blog is submitted, the data is stored in a global variable
@@ -47,8 +44,11 @@ app.post('/publishPost', (req, res) => {
   newBlogPost = {
     blogAuthor: req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
+    // replace all line breaks in the contents of the blog with br tags using regex (either r or n or both)
     blogContent: req.body.blogContent.replace(/\r?\n/g,'<br>'),
+    //receiving gif url and title and passing it as an object ready to save into the global variable
     blogGif: JSON.parse(req.body.gifBuffer),
+    //turn date into better formated date
     blogDate: new Date().toLocaleString(),
     comments: [],
     blogEmoji: {
@@ -57,14 +57,13 @@ app.post('/publishPost', (req, res) => {
       shocked: 0
     }
   }
-  // newBlogPost.blogDate = newBlogPost.blogDate.toDateString() + ' ' + newBlogPost.blogDate.toTimeString().slice(-10);
-  // newBlogPost.blogDate = newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getFullYear() + newBlogPost.blogDate.getMonth() + newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getHours() + newBlogPost.blogDate.getMinutes();
-  console.log(newBlogPost.blogDate)
   readWrite.handlePostData(req, newBlogPost);
   res.redirect('/showPost');
 });
 
-// Render / show new blog pages and insert blog post data from the global variable via handlebars
+// Render / show new blog pages and insert blog post data from the global variable via handlebars. Since we only have the /showPost 
+//route for every time we show a post, we need a global variable that we can access every time. We also send the respective js and css files. 
+
 app.get('/showPost', (req, res) => {
   res.render('blogPost', {
     title: newBlogPost.blogTitle,
@@ -93,7 +92,6 @@ app.get('/blogPost/:title', (req, res) => {
     newBlogPost = object.blogData.find(post => post.blogTitle === title);
     res.redirect('/showPost');
   });
-//  readWrite.findBlogPost(req, res, newBlogPost);
 });
 
 /* read the json and turn contents into object, then get the comment from the form data and assign it to new comment object. 
@@ -118,11 +116,9 @@ app.post('/emoji', (req, res) =>{
     }
     readWrite.write(object);
   });
-  //  204 - request has succeeded but the client doesn't need to leave the current page
+  //  204 - request has succeeded but the client doesn't need to leave the current page, but data is still sent.
   res.status(204).send();
 })
-
-
 
 app.get('*', (req,res, next) => {
   let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);

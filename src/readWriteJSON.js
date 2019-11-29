@@ -23,9 +23,9 @@ const displayAllPosts = (res) => {
         //rendering handlebar templates for the homepage and sending a reference to the javascript file
         res.render('index', {
             js: 'index.js',
+            //post is an array that the forEach is looping through in index.handlebars
             post: object.blogData
         })
-        //post is an array that the forEach is looping through in index.handlebars
     })
 };
 const handlePostData = (req) => {
@@ -45,26 +45,14 @@ const newComment = (req) => {  fs.readFile('blogPost.json', 'utf8', (error, cont
     };
     newBlogPost.comments.push(newComment); // write new comment to global var so it can be rendered immeditately
     let currentBlogPost = object.blogData.findIndex(post => post.blogTitle === req.body.blogTitle);
-    object.blogData[currentBlogPost].comments.push(newComment);
-    write(object);
+    object.blogData[currentBlogPost].comments.push(newComment);// pushing into an object which we will put into JSON
+    write(object);//puts into json 
 })};
 
- const showAllAuthors = () => {
-    let authorArray;
-
-    fs.readFile('blogPost.json', 'utf8', (error, contents) => {
-        if (error) throw error;
-        const object = JSON.parse(contents);
-        authorArray = object.blogData.map(blog => blog.blogAuthor)
-    });
-    return authorArray;     
-}
- 
 
 module.exports = {
     displayAllPosts,
     write,
     handlePostData,
-    newComment,
-    showAllAuthors
+    newComment
 };
