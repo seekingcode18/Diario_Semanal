@@ -30,6 +30,7 @@
 ![blopost](/blogPost.jpg) 
 
 
+
 ## Functionality:  
 -When they click on a new post, take them to a new page to write a post.  
 -Implementing a word count on the inputs (newPost and newComment).   
@@ -77,6 +78,7 @@
 - Ran into problems with import and export syntax
 - Solved that but couldn’t pass global variables between the files
 
+
 # Day 2 Retro 
 
 - Insert blog data from JSON into blogPost.html
@@ -89,11 +91,14 @@
 - Add Giphy attribution
 - Add alt attributes for images
 ## Problems we faced:
-- Running routes twice 
+- Running routes twice
+- Tried to make a dynamic webpage by injecting information through front-end javascript
+![brainstorm](public/images/routing.JPG)
  ## Solution: 
 - Redirected it to render the original page the comments were made on.
 - Could render new comments once it was submitted but not a second time 
 - Solution: Nodemon restarts server due to changes but it works on node (happened again on day 3)
+- Solved dynamic webpage issue by using handlebars. 
 
 # Day 3 Retro
 ## Problems and solutions:
