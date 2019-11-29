@@ -4,8 +4,14 @@
   box-sizing: border-box;
 }
 
+::selection {
+  color: #ffffff;
+  background: #424b54;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
+  padding-bottom: 50px;
 }
 
 h1,
@@ -35,17 +41,23 @@ a {
 header {
   padding: 15px 0;
   background: #424b54;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 nav {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0 5% 0 10%;
+  margin: 0 5%;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .home__container {
   width: 80%;
+  max-width: 1200px;
   margin: auto;
   padding: 40px 0;
 }
@@ -66,7 +78,6 @@ form {
   position: relative;
   bottom: 20px;
   padding: 10px;
-  
 }
 
 .newPostForm {
@@ -83,7 +94,6 @@ input[type="text"] {
 
 ::placeholder {
   color: #000000;
-
 }
 
 textarea {
@@ -91,6 +101,7 @@ textarea {
   border: 0;
   border-bottom: 1px solid #818991;
   font-family: 'Montserrat', sans-serif;
+  resize: none;
 }
 
 input[type="submit"] {
@@ -104,7 +115,7 @@ input[type="submit"] {
   transition: 0.3s;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="submit"]:active {
   box-shadow: 2px 2px 2px #999;
   cursor: pointer;
   border: #424b54 1px solid;
@@ -126,10 +137,31 @@ input[type="submit"]:hover {
 
 .gifs__display > * {
   padding: 10px;
-  /* width: 200px; */
-  /* overflow: hidden; */
 }
 
 .gifs__display > *:active {
   border: #79ace0 3px solid
+}
+
+@media(max-width: 540px) {
+  .home__container {
+    width: 86%;
+    margin: 0 auto;
+  }
+  .page__title {
+    font-size: 24px;
+  }
+}
+
+@media(max-width: 400px) {
+  h1 {
+    font-size: 25px;
+  }
+  input[type="text"], textarea {
+    width: 86%;
+    margin: auto;
+  }
+  .newPostForm > input[type="submit"] {
+    margin-left: 7%;
+  }
 }

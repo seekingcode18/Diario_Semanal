@@ -4,8 +4,14 @@
   box-sizing: border-box;
 }
 
+::selection {
+  color: #ffffff;
+  background: #424b54;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
+  padding-bottom: 50px;
 }
 
 h1,
@@ -34,13 +40,18 @@ a {
 header {
   padding: 15px 0;
   background: #424b54;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 nav {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin: 0 5% 0 10%;
+  margin: 0 5%;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .banner {
@@ -49,7 +60,9 @@ nav {
   display: flex;
   background: url('../images/books.jpg');
   background-size: cover;
+  overflow: hidden;
 }
+
 .banner__overlay {
   display: flex;
   justify-content: center;
@@ -57,15 +70,19 @@ nav {
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.3);
+  padding: 0 10%;
+}
+
+.banner__overlay > p {
   font-size: 25px;
   line-height: 1.5;
-  color: #d7e4f2;
-  padding: 0 10%;
+  color: #e0ecfa;
 }
 
 .home__container {
   width: 80%;
-  margin: auto;
+  margin: 0 auto;
+  max-width: 1200px;
   padding: 20px 0;
 }
 
@@ -96,7 +113,7 @@ nav {
   );
 }
 
-.preview__title {
+.preview__title, .preview__date {
   padding-bottom: 10px;
 }
 
@@ -104,6 +121,21 @@ nav {
   padding-bottom: 5px;
 }
 
-.preview__date {
-  padding-bottom: 10px;
+@media(max-width: 540px) {
+  .home__container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media(max-width: 400px) {
+  h1 {
+    font-size: 25px;
+  }
+}
+
+@media(max-width: 300px) {
+  .banner__overlay > p {
+    font-size: 20px;
+  }
 }
