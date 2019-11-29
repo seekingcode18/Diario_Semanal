@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080; //let heroku choose port; if it can't, default to 8080
 
 // Import built-in node module to read and write files
 const fs = require('fs');
@@ -18,6 +18,10 @@ app.engine('handlebars', Handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use('/', express.static('views'));
 app.use('/', express.static('public'));
+
+// let heroku know everything relates to the root folder
+app.use(express.static(__dirname));
+
 //lets us read the body of the url query (that's how we get req.body)
 app.use(express.urlencoded({extended: false}));
 
