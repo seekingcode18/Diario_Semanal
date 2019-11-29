@@ -25,9 +25,6 @@ app.use(express.static(__dirname));
 //lets us read the body of the url query (that's how we get req.body)
 app.use(express.urlencoded({extended: false}));
 
-// load favicon
-app.use('/favicon.ico', express.static(__dirname + '/public/images/favicon.ico'));
-
 //Made global variable so multiple routes have access to data stored
 let newBlogPost;
 
