@@ -14,7 +14,7 @@ const Handlebars = require("express-handlebars");
 //setting main.handlebars as our default layout
 app.engine('handlebars', Handlebars({defaultLayout: 'main'}));
 
-//handlebars view engine which tells the computer which way do we need to render the files 
+//handlebars view engine which tells the computer which way do we need to render the files
 app.set('view engine', 'handlebars');
 app.use('/', express.static('views'));
 app.use('/', express.static('public'));
@@ -81,7 +81,7 @@ app.get('/showPost', (req, res) => {
 /*
 Tracking submitted posts by title. Matching title is found in JSON file and sent
 to write onto index.handlebars through index.js. If user types in this path into the url it will redirect 
-them to the corresponding post page without errors. 
+them to the corresponding post page without errors.
 Have yet to implement defensive programming when user looks for a title that doesn't exist.
 */
 app.get('/blogPost/:title', (req, res) => {
@@ -95,8 +95,8 @@ app.get('/blogPost/:title', (req, res) => {
 });
 
 /* read the json and turn contents into object, then get the comment from the form data and assign it to new comment object. 
-We then push the new comment object into the global variable comments array inside it. 
-  */ 
+We then push the new comment object into the global variable comments array inside it.
+  */
 app.post('/writeComment', (req, res) => {
   readWrite.newComment(req, newBlogPost);
   res.redirect('showPost');
@@ -122,12 +122,12 @@ app.post('/emoji', (req, res) =>{
 
 app.get('*', (req,res, next) => {
   let err = new Error(`${req.ip} tried to reach ${req.originalUrl}`);
-  err.statusCode = 404; 
+  err.statusCode = 404;
   next(err);
 })
 app.use( (err, req, res, next) => {
-  console.error(err.message); 
-  if (!err.statusCode) err.statusCode = 500; 
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
     res.status(err.statusCode).render('errorPage');
 } )
 

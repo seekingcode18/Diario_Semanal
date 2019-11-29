@@ -186,9 +186,3 @@ input[type='submit']:hover, input[type='submit']:active {
     font-size: 24px;
   }
 }
-
-@media(max-width: 400px) {
-  h1 {
-    font-size: 25px;
-  }
-}

@@ -154,9 +154,6 @@ input[type="submit"]:hover, input[type="submit"]:active {
 }
 
 @media(max-width: 400px) {
-  h1 {
-    font-size: 25px;
-  }
   input[type="text"], textarea {
     width: 86%;
     margin: auto;
