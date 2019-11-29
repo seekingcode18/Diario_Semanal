@@ -1,0 +1,30 @@
+<header>
+  <nav>
+    <a href="/"><h1>Diario Semanal</h1></a>
+    <a href="/newPost" class="nav__link">New Post</a>
+  </nav>
+</header>
+<main class="home__container">
+  <p class="page__title">Write a new blog post</p>
+  <form action="/publishPost" method="POST" class="newPostForm" autocomplete="off">
+    <input type="text" name="blogTitle" id="" placeholder="Enter your title here" autocomplete="off" required autofocus>
+    <input type="text" name="blogAuthor" id="" placeholder="Enter your name here" required>
+    <textarea maxlength="2500" name="blogContent" id="" cols="30" rows="10" placeholder="Write your blog post here" autocomplete="off" required></textarea>
+   {{!-- title storage, which is accessible when we submit the form --}}
+    <input type="hidden" name="gifBuffer" id="gifBuffer">
+    <p class="characterCount"></p>
+    <input type="submit" value="Submit">
+  </form>
+  {{!-- giffs container! includes the form to search for a gif --}}
+  <div class="gifs__container">
+    <form action="" class="gifs__form">
+      <input type="text" name="searchGifs" id="gifSearch" placeholder="Search for a GIF*" autocomplete="off" required>
+      <input type="submit" value="Search" id="gifSubmit" autocomplete="off" required>
+    <p>*Please select a GIF to go with your post</p>
+    </form>
+    {{!-- empty div to insert gifs into from newPost.js--}}
+    <div class="gifs__display">
+
+    </div>
+  </div>
+</main>

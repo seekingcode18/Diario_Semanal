@@ -1,0 +1,26 @@
+<header>
+  <nav>
+    <a href="/"><h1>Diario Semanal</h1></a>
+    <a href="/newPost" class="nav__link">New Post</a>
+  </nav>
+</header>
+<section class="banner">
+  <div class="banner__overlay">
+    <p>“Every secret of a writer’s soul, every experience of his life, every quality of his mind, is written large in his works.”<br>
+— Virginia Woolf</p>
+  </div>
+</section>
+<main class="home__container">
+  {{!-- handlebars for loop function.
+  everything is pre preview container will be created for each item inside the 'post' array, which is coming from our index route 
+  in app.js  --}}
+{{#each post}}
+    <div class="preview__container" data-blog-title="{{this.blogTitle}}" id="next-post">
+      <h2 class="preview__title">{{this.blogTitle}}</h2>
+      <p class="preview__author">{{this.blogAuthor}}</p>
+      <p class="preview__date">{{this.blogDate}}</p>
+      <p class="preview__content">{{this.blogContent}}</p>
+      <div class="fadeOut"></div>
+    </div>
+  {{/each}}
+</main>
