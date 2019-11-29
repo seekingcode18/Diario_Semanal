@@ -9,7 +9,8 @@
     <h2 class="post__title">{{ title }}</h2>
     <p class="post__author">{{ author }}</p>
     <p class="post__date">{{ date }}</p>
-    <p class="post__content">{{ content }}</p>
+    {{!-- escape the content with triple braces so we can pass in <br> tags from JSON --}}
+    <p class="post__content">{{{ content }}}</p>
     <div class="gif__container"><img src="{{ gif.url }}" alt="{{ gif.title }}"></div>
   </div>
   <form class="emoji__container" action="/emoji" method="POST">

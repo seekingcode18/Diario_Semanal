@@ -47,9 +47,9 @@ app.post('/publishPost', (req, res) => {
   newBlogPost = {
     blogAuthor: req.body.blogAuthor,
     blogTitle: req.body.blogTitle,
-    blogContent: req.body.blogContent,
+    blogContent: req.body.blogContent.replace(/\r?\n/g,'<br>'),
     blogGif: JSON.parse(req.body.gifBuffer),
-    blogDate: new Date(),
+    blogDate: new Date().toLocaleString(),
     comments: [],
     blogEmoji: {
       like: 0,
@@ -58,7 +58,7 @@ app.post('/publishPost', (req, res) => {
     }
   }
   // newBlogPost.blogDate = newBlogPost.blogDate.toDateString() + ' ' + newBlogPost.blogDate.toTimeString().slice(-10);
-  newBlogPost.blogDate = newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getFullYear() + newBlogPost.blogDate.getMonth() + newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getHours() + newBlogPost.blogDate.getMinutes();
+  // newBlogPost.blogDate = newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getFullYear() + newBlogPost.blogDate.getMonth() + newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getHours() + newBlogPost.blogDate.getMinutes();
   console.log(newBlogPost.blogDate)
   readWrite.handlePostData(req, newBlogPost);
   res.redirect('/showPost');
