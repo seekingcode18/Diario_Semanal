@@ -24,6 +24,9 @@ app.use(express.urlencoded({
   extended: false
 }));
 
+// load favicon
+app.use('/favicon.ico', express.static(__dirname + '/public/images/favicon.ico'));
+
 // render index.handlebars on home root route with all posts
 app.get('/', (req, res) => readWrite.displayAllPosts(res));
 
@@ -54,6 +57,9 @@ app.post('/publishPost', (req, res) => {
       shocked: 0
     }
   }
+  // newBlogPost.blogDate = newBlogPost.blogDate.toDateString() + ' ' + newBlogPost.blogDate.toTimeString().slice(-10);
+  newBlogPost.blogDate = newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getFullYear() + newBlogPost.blogDate.getMonth() + newBlogPost.blogDate.getDay() + newBlogPost.blogDate.getHours() + newBlogPost.blogDate.getMinutes();
+  console.log(newBlogPost.blogDate)
   readWrite.handlePostData(req, newBlogPost);
   res.redirect('/showPost');
 });
