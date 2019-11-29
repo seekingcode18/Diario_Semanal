@@ -21,7 +21,13 @@
 *As a user, I want to edit my existing blog posts.  
 *As a user, I want to not be confused with another author of the same name.   
 
-
+# Screenshots: 
+###### homepage
+![homepage](/homePage.jpg) 
+###### new post
+![nepost](/newPost.jpg) 
+###### blog post
+![blopost](/blogPost.jpg) 
 
 
 ## Functionality:  
