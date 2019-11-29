@@ -19,9 +19,6 @@ app.set('view engine', 'handlebars');
 app.use('/', express.static('views'));
 app.use('/', express.static('public'));
 
-// let heroku know everything relates to the root folder
-app.use(express.static(__dirname));
-
 //lets us read the body of the url query (that's how we get req.body)
 app.use(express.urlencoded({extended: false}));
 
