@@ -40,7 +40,7 @@
 -Emoji reacts, similar to FB format.     
 -Responsive webpage -> Breakpoints (Phone, Tablet, PC, XL screen).  
 
-#Technologies
+# Technologies
 - Templating -> Handlebars
 - Node/ Express + JSON
 - GitHub Desktop for version control
