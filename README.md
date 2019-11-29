@@ -1,4 +1,5 @@
-# Diario_Semanal
+
+# Four-day project: Diario Semanal
 
 ## User Stories
 
